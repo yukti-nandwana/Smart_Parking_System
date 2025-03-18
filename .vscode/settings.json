@@ -26,5 +26,6 @@
             "username": "root",
             "database": "my_project"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
