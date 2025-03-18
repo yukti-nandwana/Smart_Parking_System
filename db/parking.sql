@@ -12,3 +12,14 @@ VALUES
     ('available'), 
     ('available'), 
     ('occupied');
+
+INSERT INTO ParkingSpots (status)
+SELECT CASE 
+           WHEN RAND() < 0.5 THEN 'available'
+           ELSE 'occupied'
+       END
+FROM (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) t1,
+     (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) t2;
+
+-- Verify the data
+SELECT * FROM ParkingSpots;
