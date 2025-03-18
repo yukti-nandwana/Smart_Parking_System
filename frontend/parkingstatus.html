@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Status</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Parking Spot Status</h1>
+        <table id="parkingTable">
+            <thead>
+                <tr>
+                    <th>Spot ID</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Parking data will be inserted here -->
+            </tbody>
+        </table>
+        <button onclick="location.reload()">Refresh</button>
+    </div>
+
+    <script>
+        async function fetchParkingData() {
+            try {
+                const response = await fetch('/Smart_Parking_System/ParkingStatusServlet');
+                const parkingData = await response.json();
+                const tableBody = document.getElementById('parkingTable').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear existing data
+                
+                parkingData.forEach(spot => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${spot.spotId}</td>
+                        <td class="${spot.status === 'available' ? 'available' : 'occupied'}">${spot.status}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching parking data:', error);
+            }
+        }
+        
+        fetchParkingData();
+    </script>
+</body>
+</html>
