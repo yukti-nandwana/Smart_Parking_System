@@ -55,3 +55,22 @@ button {
 button:hover {
     background: #0056b3;
 }
+
+/* Makes available rows clickable */
+.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.clickable:hover {
+    background-color: #d4edda;
+}
+
+/* Status Colors */
+.available {
+    color: green;
+    font-weight: bold;
+}
+.occupied {
+    color: red;
+    font-weight: bold;
+}

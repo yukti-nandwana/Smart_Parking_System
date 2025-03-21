@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,5 +17,53 @@
         <div id="message"></div>
     </div>
     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Reservation</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Reserve Your Parking Spot</h1>
+        <form id="reservationForm" action="ParkingServlet" method="POST">
+            <label for="spotId">Parking Spot ID:</label>
+            <input type="number" id="spotId" name="spotId" required readonly>
+            <button type="submit">Reserve Spot</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // Autofill Spot ID from URL
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const spotId = urlParams.get('slotId');
+            if (spotId) {
+                document.getElementById('spotId').value = spotId;
+            }
+        };
+
+        // Form submission with confirmation message
+        document.getElementById('reservationForm').onsubmit = function (e) {
+            e.preventDefault(); // Stop form submission to handle it manually
+
+            const spotId = document.getElementById('spotId').value;
+            
+            // Simulate reservation process (you can replace this with a real API call)
+            setTimeout(() => {
+                document.querySelector('.container').innerHTML = `
+                    <h1>Reservation Confirmed!</h1>
+                    <p>Your parking spot #${spotId} has been reserved successfully.</p>
+                    <button onclick="window.location.href='index.html'">Go to Home</button>
+                `;
+            }, 500);
+        };
+    </script>
 </body>
 </html>

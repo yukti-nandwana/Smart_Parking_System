@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Parking data will be inserted here -->
+                
             </tbody>
         </table>
         <button onclick="location.reload()">Refresh</button>
@@ -45,6 +45,82 @@
         }
         
         fetchParkingData();
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Status</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Parking Spot Status</h1>
+        <div id="parking-slots">
+            <!-- Parking slots will be dynamically added here -->
+        </div>
+        <button onclick="location.reload()">Refresh</button>
+    </div>
+
+    <script>
+        // Array of parking slots (0 = occupied, 1 = available)
+        const slots = [1, 0, 1, 1, 0, 1, 1, 0, 1, 1];
+
+        // Function to display parking slots
+        function displayParkingSlots() {
+            const parkingDiv = document.getElementById("parking-slots");
+            parkingDiv.innerHTML = ""; // Clear previous slots
+
+            slots.forEach((slot, index) => {
+                const slotDiv = document.createElement("div");
+                slotDiv.textContent = `Slot ${index + 1}`;
+                slotDiv.style.padding = "10px";
+                slotDiv.style.margin = "5px";
+                slotDiv.style.display = "inline-block";
+                slotDiv.style.border = "2px solid black";
+                slotDiv.style.borderRadius = "5px";
+                slotDiv.style.backgroundColor = slot ? "green" : "red";
+                slotDiv.style.color = "white";
+                slotDiv.style.cursor = "pointer"; // Clickable
+
+                // Add Click Event to redirect if available
+                if (slot === 1) {
+                    slotDiv.addEventListener("click", function () {
+                        window.location.href = `/frontend/reservation.html?slotId=${index + 1}`;
+                    });
+                    
+                }
+
+                parkingDiv.appendChild(slotDiv);
+            });
+        }
+
+        // Fetch parking data from the servlet (if needed)
+        async function fetchParkingData() {
+            try {
+                const response = await fetch('/Smart_Parking_System/ParkingStatusServlet');
+                const parkingData = await response.json();
+                
+                // Update slots array with data from the server (optional)
+                parkingData.forEach((spot, index) => {
+                    slots[index] = spot.status === 'available' ? 1 : 0;
+                });
+
+                // Display updated slots
+                displayParkingSlots();
+            } catch (error) {
+                console.error('Error fetching parking data:', error);
+                // Fallback: Display local slots if fetching fails
+                displayParkingSlots();
+            }
+        }
+
+        // Call the function to show slots when page loads
+        window.onload = fetchParkingData;
     </script>
 </body>
 </html>

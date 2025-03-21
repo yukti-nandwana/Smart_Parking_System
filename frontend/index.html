@@ -10,8 +10,8 @@
 
 </head>
 <body>
-    <h2>Available Parking Slots</h2>
-    <div id="parking-slots"></div>
+    <!-- <h2>Available Parking Slots</h2>
+    <div id="parking-slots"></div> -->
     
     <header>
         <h1>Smart Parking System</h1>
@@ -25,13 +25,25 @@
     <section class="search">
         <h2>Find a Parking Spot</h2>
         <input type="text" id="location" placeholder="Enter Location">
-        <button onclick="searchParking()">Search</button>
+        <button onclick="redirectToResults()">Search</button>
     </section>
 
     <footer>
         <p>&copy; 2025 Smart Parking. All rights reserved.</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+
+
+    <script>
+        function redirectToResults() {
+            const location = document.getElementById('location').value;
+            if (location) {
+                window.location.href = `results.html?location=${encodeURIComponent(location)}`;
+            } else {
+                alert('Please enter a location');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,121 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Parking Results</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="results.html">Find Parking</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <section id="results">
+        <h2>Available Parking Spots</h2>
+        <div id="parking-list"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Smart Parking. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const location = urlParams.get('location');
+            const parkingList = document.getElementById('parking-list');
+
+            if (location) {
+                const parkingSpots = {
+                    "nsp": ["NSP Metro Station Parking", "NSP Mall Parking", "NSP Residential Parking"],
+                    "cp": ["CP Block A Parking", "CP Block B Parking", "CP Multi-level Parking"]
+                };
+
+                const spots = parkingSpots[location.toLowerCase()] || ["No parking spots found."];
+                spots.forEach(spot => {
+                    const spotElement = document.createElement('p');
+                    spotElement.textContent = spot;
+                    parkingList.appendChild(spotElement);
+                });
+            } else {
+                parkingList.textContent = 'No location provided.';
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Results</title>
+    <link rel="stylesheet" href="styleresults.html">
+</head>
+<body>
+    <header>
+        <h1>Smart Parking System</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="results.html">Find Parking</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <section id="results">
+        <h2>Available Parking Spots</h2>
+        <select id="parking-select">
+            <option value="">Select Parking Spot</option>
+        </select>
+        <button onclick="checkSlot()">Check Slots</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Smart Parking. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const location = urlParams.get('location');
+            const parkingSelect = document.getElementById('parking-select');
+
+            if (location) {
+                const parkingSpots = {
+                    "nsp": ["NSP Metro Station Parking", "NSP Mall Parking", "NSP Residential Parking"],
+                    "cp": ["CP Block A Parking", "CP Block B Parking", "CP Multi-level Parking"]
+                };
+
+                const spots = parkingSpots[location.toLowerCase()] || ["No parking spots found."];
+                spots.forEach(spot => {
+                    const option = document.createElement('option');
+                    option.value = spot;
+                    option.textContent = spot;
+                    parkingSelect.appendChild(option);
+                });
+            } else {
+                const noLocation = document.createElement('p');
+                noLocation.textContent = 'No location provided.';
+                parkingSelect.parentNode.insertBefore(noLocation, parkingSelect);
+                parkingSelect.style.display = 'none';
+            }
+        }
+
+        function checkSlot() {
+            const selectedSpot = document.getElementById('parking-select').value;
+            if (selectedSpot) {
+                window.location.href = `parkingstatus.html?spot=${encodeURIComponent(selectedSpot)}`;
+            } else {
+                alert('Please select a parking spot.');
+            }
+        }
+    </script>
+</body>
+</html>
