@@ -1,144 +1,89 @@
-/* Reset default margins and paddings */
-* {
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Body Styling */
-body {
     background-color: #f4f4f4;
     text-align: center;
 }
 
-/* Header Styling */
+/* Header */
 header {
-    background-color: #007bff;
-    color: white;
+    background: #333;
+    color: #fff;
     padding: 15px;
-}
-
-header h1 {
-    margin-bottom: 10px;
-}
-
-/* Navigation Buttons */
-nav {
-    margin: 15px 0;
-}
-
-.nav-btn {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 0 10px;
-    transition: background-color 0.2s, transform 0.1s;
-    display: inline-block;
-}
-
-/* Home Button */
-.home-btn {
-    background-color: darkblue;
-}
-
-.home-btn:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-/* Find Parking Button */
-.find-btn {
-    background-color: darkblue;
-}
-
-.find-btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-/* Search Section */
-.search {
-    margin: 50px auto;
-    padding: 20px;
-    width: 50%;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.search input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search button:hover {
-    background-color: #0056b3;
-}
-
-/* Footer */
-footer {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-}
-
-/* Parking Area */
-.parking-area {
-    margin: 50px auto;
-    padding: 20px;
-    width: 50%;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     text-align: center;
 }
 
-.parking-area button {
-    padding: 10px 20px;
-    background-color: #28a745;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Centering Content */
+.container, #results {
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 30px auto; /* Center the container with a margin */
+    max-width: 500px; /* Adjust width as needed */
+    text-align: center;
+}
+
+/* Buttons & Forms */
+button, input, select {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
 }
 
-.parking-area button:hover {
-    background-color: #218838;
-}
-
-/* Ensure content fills the page and pushes footer down */
-html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Content Wrapper to push footer down */
-.content-wrapper {
-    flex: 1;
+button:hover {
+    background-color: #0056b3;
 }
 
 /* Footer */
 footer {
-    padding: 10px;
-    background-color: #333;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #333;
     color: white;
+    text-align: center;
+    padding: 10px;
+}
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content towards the top */
+    min-height: 60vh; /* Adjust height so it's closer to the top */
+    margin-top: 20px; /* Add some margin to bring it just below Home */
+}
+.icons {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: 20px; /* Increases spacing between icons */
+}
+
+.icons a img {
+    width: 32px;  /* Increased size */
+    height: 32px; /* Increased size */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.icons a img:hover {
+    transform: scale(1.3); /* Slight hover effect */
 }
