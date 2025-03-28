@@ -1,54 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parking Status</title>
-    <link rel="stylesheet" href="style3.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Parking Spot Status</h1>
-        <table id="parkingTable">
-            <thead>
-                <tr>
-                    <th>Spot ID</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        <button onclick="location.reload()">Refresh</button>
-    </div>
-
-    <script>
-        async function fetchParkingData() {
-            try {
-                const response = await fetch('/Smart_Parking_System/ParkingStatusServlet');
-                const parkingData = await response.json();
-                const tableBody = document.getElementById('parkingTable').querySelector('tbody');
-                tableBody.innerHTML = ''; // Clear existing data
-                
-                parkingData.forEach(spot => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${spot.spotId}</td>
-                        <td class="${spot.status === 'available' ? 'available' : 'occupied'}">${spot.status}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error fetching parking data:', error);
-            }
-        }
-        
-        fetchParkingData();
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,15 +9,20 @@
 <body>
     <div class="container">
         <h1>Parking Spot Status</h1>
-        <div id="parking-slots">
-            <!-- Parking slots will be dynamically added here -->
-        </div>
-        <button onclick="location.reload()">Refresh</button>
+        <div id="parking-slots"></div>
+        <button onclick="window.location.href='index.html'">Back</button>
     </div>
 
     <script>
         // Array of parking slots (0 = occupied, 1 = available)
-        const slots = [1, 0, 1, 1, 0, 1, 1, 0, 1, 1];
+        let slots = [1, 0, 1, 1, 0, 1, 1, 0, 1, 1];
+
+        // Check URL for reserved slot and update
+        const urlParams = new URLSearchParams(window.location.search);
+        const reservedSlot = urlParams.get("reservedSlot");
+        if (reservedSlot !== null) {
+            slots[parseInt(reservedSlot) - 1] = 0; // Mark as occupied
+        }
 
         // Function to display parking slots
         function displayParkingSlots() {
@@ -85,42 +39,22 @@
                 slotDiv.style.borderRadius = "5px";
                 slotDiv.style.backgroundColor = slot ? "green" : "red";
                 slotDiv.style.color = "white";
-                slotDiv.style.cursor = "pointer"; // Clickable
+                slotDiv.style.cursor = slot ? "pointer" : "not-allowed";
 
-                // Add Click Event to redirect if available
-                if (slot === 1) {
+                // Add Click Event for available slots only
+                if (slot) {
                     slotDiv.addEventListener("click", function () {
-                        window.location.href = `/frontend/reservation.html?slotId=${index + 1}`;
+                        window.location.href = `reservation.html?spotId=${index + 1}`;
                     });
-                    
                 }
 
                 parkingDiv.appendChild(slotDiv);
             });
         }
 
-        // Fetch parking data from the servlet (if needed)
-        async function fetchParkingData() {
-            try {
-                const response = await fetch('/Smart_Parking_System/ParkingStatusServlet');
-                const parkingData = await response.json();
-                
-                // Update slots array with data from the server (optional)
-                parkingData.forEach((spot, index) => {
-                    slots[index] = spot.status === 'available' ? 1 : 0;
-                });
-
-                // Display updated slots
-                displayParkingSlots();
-            } catch (error) {
-                console.error('Error fetching parking data:', error);
-                // Fallback: Display local slots if fetching fails
-                displayParkingSlots();
-            }
-        }
-
         // Call the function to show slots when page loads
-        window.onload = fetchParkingData;
+        window.onload = displayParkingSlots;
     </script>
 </body>
 </html>
+

@@ -6,34 +6,27 @@
     <title>Smart Parking - Home</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-
-
 </head>
 <body>
-    <!-- <h2>Available Parking Slots</h2>
-    <div id="parking-slots"></div> -->
-    
-    <header>
-        <h1>Smart Parking System</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="results.html">Find Parking</a>
-            <a href="dashboard.html">Dashboard</a>
-        </nav>
-    </header>
+    <div class="content-wrapper">
+        <header>
+            <h1>Smart Parking System</h1>
+            <nav>
+                <a href="index.html" class="nav-btn home-btn">Home</a>
+                <a href="results.html" class="nav-btn find-btn">Find Parking</a>
+            </nav>
+        </header>
 
-    <section class="search">
-        <h2>Find a Parking Spot</h2>
-        <input type="text" id="location" placeholder="Enter Location">
-        <button onclick="redirectToResults()">Search</button>
-    </section>
+        <section class="search">
+            <h2>Find a Parking Spot</h2>
+            <input type="text" id="location" placeholder="Enter Location">
+            <button onclick="redirectToResults()">Search</button>
+        </section>
+    </div>
 
     <footer>
         <p>&copy; 2025 Smart Parking. All rights reserved.</p>
     </footer>
-
-    <!-- <script src="js/script.js"></script> -->
-
 
     <script>
         function redirectToResults() {

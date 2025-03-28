@@ -4,68 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parking Results</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Parking Results</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="results.html">Find Parking</a>
-            <a href="dashboard.html">Dashboard</a>
-        </nav>
-    </header>
-
-    <section id="results">
-        <h2>Available Parking Spots</h2>
-        <div id="parking-list"></div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Smart Parking. All rights reserved.</p>
-    </footer>
-
-    <script>
-        window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const location = urlParams.get('location');
-            const parkingList = document.getElementById('parking-list');
-
-            if (location) {
-                const parkingSpots = {
-                    "nsp": ["NSP Metro Station Parking", "NSP Mall Parking", "NSP Residential Parking"],
-                    "cp": ["CP Block A Parking", "CP Block B Parking", "CP Multi-level Parking"]
-                };
-
-                const spots = parkingSpots[location.toLowerCase()] || ["No parking spots found."];
-                spots.forEach(spot => {
-                    const spotElement = document.createElement('p');
-                    spotElement.textContent = spot;
-                    parkingList.appendChild(spotElement);
-                });
-            } else {
-                parkingList.textContent = 'No location provided.';
-            }
-        }
-    </script>
-</body>
-</html> -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parking Results</title>
-    <link rel="stylesheet" href="styleresults.html">
+    <link rel="stylesheet" href="styleresults.css">
 </head>
 <body>
     <header>
         <h1>Smart Parking System</h1>
         <nav>
             <a href="index.html">Home</a>
-            <a href="results.html">Find Parking</a>
-            <a href="dashboard.html">Dashboard</a>
         </nav>
     </header>
 
@@ -118,4 +63,106 @@
         }
     </script>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Results</title>
+    <link rel="stylesheet" href="styleresults.css">
+    <style>
+        .location-box {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .location-box:hover {
+            background-color: #0056b3;
+        }
+
+        .location-container {
+            margin-bottom: 20px; /* Added space below the location selection */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Parking System</h1>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+
+    <section id="results">
+        <h2>Available Parking Spots</h2>
+        <div class="location-container">
+            <select id="parking-select">
+                <option value="">Select Parking Spot</option>
+            </select>
+        </div>
+        <button onclick="checkSlot()">Check Slots</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Smart Parking. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const location = urlParams.get('location');
+            const parkingSelect = document.getElementById('parking-select');
+
+            if (location) {
+                const parkingSpots = {
+                    "nsp": ["NSP Metro Station Parking", "NSP Mall Parking", "NSP Residential Parking"],
+                    "cp": ["CP Block A Parking", "CP Block B Parking", "CP Multi-level Parking"]
+                };
+
+                const spots = parkingSpots[location.toLowerCase()] || ["No parking spots found."];
+                spots.forEach(spot => {
+                    const option = document.createElement('option');
+                    option.value = spot;
+                    option.textContent = spot;
+                    parkingSelect.appendChild(option);
+                });
+            } else {
+                const noLocation = document.createElement('p');
+                noLocation.textContent = 'No location provided.';
+                
+                const locationBox = document.createElement('a');
+                locationBox.href = "index.html";
+                locationBox.className = "location-box";
+                locationBox.textContent = "Please select a location";
+
+                const container = document.createElement('div');
+                container.className = "location-container";
+                container.appendChild(noLocation);
+                container.appendChild(document.createElement('br')); // Adding line break for spacing
+                container.appendChild(locationBox);
+                
+                parkingSelect.parentNode.insertBefore(container, parkingSelect);
+                parkingSelect.style.display = 'none';
+            }
+        }
+
+        function checkSlot() {
+            const selectedSpot = document.getElementById('parking-select').value;
+            if (selectedSpot) {
+                window.location.href = `parkingstatus.html?spot=${encodeURIComponent(selectedSpot)}`;
+            } else {
+                alert('Please select a parking spot.');
+            }
+        }
+    </script>
+</body>
 </html>
+

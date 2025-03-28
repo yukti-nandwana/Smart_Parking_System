@@ -23,6 +23,42 @@ header h1 {
     margin-bottom: 10px;
 }
 
+/* Navigation Buttons */
+nav {
+    margin: 15px 0;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: background-color 0.2s, transform 0.1s;
+    display: inline-block;
+}
+
+/* Home Button */
+.home-btn {
+    background-color: darkblue;
+}
+
+.home-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Find Parking Button */
+.find-btn {
+    background-color: darkblue;
+}
+
+.find-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
 /* Search Section */
 .search {
     margin: 50px auto;
@@ -48,6 +84,7 @@ header h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .search button:hover {
@@ -62,7 +99,7 @@ footer {
     color: white;
 }
 
-
+/* Parking Area */
 .parking-area {
     margin: 50px auto;
     padding: 20px;
@@ -80,8 +117,28 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .parking-area button:hover {
     background-color: #218838;
+}
+
+/* Ensure content fills the page and pushes footer down */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Content Wrapper to push footer down */
+.content-wrapper {
+    flex: 1;
+}
+
+/* Footer */
+footer {
+    padding: 10px;
+    background-color: #333;
+    color: white;
 }
