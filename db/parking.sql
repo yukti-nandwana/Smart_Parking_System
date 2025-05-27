@@ -1,4 +1,4 @@
-
+//database
 --CREATE DATABASEparking_system;
 
 USE parking_system;
